@@ -1,7 +1,7 @@
-import cloudinary from "../lib/cloudinary";
-import { sendJsonResponse } from "../lib/helper";
-import Message from "../models/message.models";
-import User from "../models/user.models";
+import cloudinary from "../lib/cloudinary.js";
+import { sendJsonResponse } from "../lib/helper.js";
+import Message from "../models/message.models.js";
+import User from "../models/user.models.js";
 
 export const listUsers = async (req, res) => {
   try {
