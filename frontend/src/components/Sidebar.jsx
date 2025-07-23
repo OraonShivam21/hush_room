@@ -1,13 +1,14 @@
 import { useEffect } from "react";
+import { Users } from "lucide-react";
 import { useChatStore } from "../stores/chat";
 import SidebarSkeleton from "./skeletons/SidebarSkeleton";
-import { Users } from "lucide-react";
+import { useAuthStore } from "../stores/auth";
 
 const Sidebar = () => {
   const { getUsers, users, selectedUser, setSelectedUser, isUsersLoading } =
     useChatStore();
 
-  const onlineUsers = [];
+  const { onlineUsers } = useAuthStore();
 
   useEffect(() => {
     getUsers();
@@ -22,7 +23,6 @@ const Sidebar = () => {
           <Users className="size-6" />
           <span className="font-medium hidden lg:block">Contacts</span>
         </div>
-        {/* TODO: Online filter toggle */}
       </div>
 
       <div className="overflow-y-auto w-full py-3">
