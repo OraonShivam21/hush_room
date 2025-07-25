@@ -24,7 +24,7 @@ export const useChatStore = create((set, get) => ({
   getMessages: async (userId) => {
     try {
       set({ isMessagesLoading: true });
-      const res = await get(`/messages/${userId}`);
+      const res = await api.get(`/messages/${userId}`);
       set({ messages: res.data });
     } catch (error) {
       toast.error(error.response.data.message);
@@ -38,10 +38,10 @@ export const useChatStore = create((set, get) => ({
     try {
       const { selectedUser, messages } = get();
       const res = await api.post(`/messages/send/${selectedUser._id}`, data);
-      set({ messages: [messages, res.data] });
+      set({ messages: [...messages, res.data] });
     } catch (error) {
       console.error("Error sending message", error);
-      // toast.error(error.response.data.message);
+      toast.error(error.response.data.message);
     }
   },
 
