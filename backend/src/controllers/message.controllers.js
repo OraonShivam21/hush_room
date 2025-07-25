@@ -20,7 +20,7 @@ export const listUsers = async (req, res) => {
 
 export const getMessages = async (req, res) => {
   try {
-    const { id: receiverId } = req.params.id;
+    const { id: receiverId } = req.params;
     const senderId = req.user._id;
 
     const messages = await Message.find({
