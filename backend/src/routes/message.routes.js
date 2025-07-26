@@ -12,6 +12,6 @@ router.get("/users", auth, listUsers);
 
 router.get("/:id", auth, getMessages);
 
-router.post("/send", auth, sendMessage);
+router.post("/send/:id", auth, sendMessage);
 
 export default router;

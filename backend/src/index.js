@@ -21,7 +21,7 @@ app.use(
 );
 
 app.use("/api/auth", authRoutes);
-app.use("/api/message", messageRoutes);
+app.use("/api/messages", messageRoutes);
 
 app.get("/api", (req, res) => {
   res.send("hello world! from hush_room api");
