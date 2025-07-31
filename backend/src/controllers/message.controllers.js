@@ -1,5 +1,6 @@
 import cloudinary from "../lib/cloudinary.js";
 import { sendJsonResponse } from "../lib/helper.js";
+import { getReceiverSocketId, io } from "../lib/socket.js";
 import Message from "../models/message.models.js";
 import User from "../models/user.models.js";
 
@@ -20,7 +21,7 @@ export const listUsers = async (req, res) => {
 
 export const getMessages = async (req, res) => {
   try {
-    const { id: receiverId } = req.params.id;
+    const { id: receiverId } = req.params;
     const senderId = req.user._id;
 
     const messages = await Message.find({
@@ -66,6 +67,10 @@ export const sendMessage = async (req, res) => {
     await newMessage.save();
 
     // realtime funcationlity
+    const receiverSocketId = getReceiverSocketId(receiverId);
+    if (receiverSocketId) {
+      io.to(receiverSocketId).emit("newMessage", newMessage);
+    }
 
     sendJsonResponse(res, 201, newMessage);
   } catch (error) {
