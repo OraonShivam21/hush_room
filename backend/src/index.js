@@ -27,10 +27,6 @@ app.use(
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
-app.get("/api", (req, res) => {
-  res.send("hello world! from hush_room api");
-});
-
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
